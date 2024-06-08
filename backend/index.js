@@ -11,7 +11,7 @@ const jwtSecret = '12345';
 
 app.use(cors(
     {
-        origin:["https://free-spotify-using-mern.vercel.app"],
+        origin:["https://free-spotify-using-mern-mcov.vercel.app"],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization']
     }
