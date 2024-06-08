@@ -27,7 +27,7 @@ app.options('*', (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://vishaltiwariup2019:vishal@9293@cluster0.8yuode6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://vishaltiwariup2019:vishal@9293@cluster0.8yuode6.mongodb.net/spotify', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
