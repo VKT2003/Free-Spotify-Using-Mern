@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const PORT = 4000;
+const PORT = 3001;
 const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -75,6 +75,6 @@ app.post('/login', async (req, res) => {
 );
 
 
-app.listen(PORT, () => {
+app.listen(3001, () => {
     console.log(`Server is running on port ${PORT}`);
 })
