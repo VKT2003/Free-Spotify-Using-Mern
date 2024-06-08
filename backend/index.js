@@ -18,7 +18,7 @@ app.use(cors(
 ));
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb+srv://vishaltiwariup2019:<password>@cluster0.8yuode6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() => {
+mongoose.connect('mongodb+srv://vishaltiwariup2019:vishal@9293@cluster0.8yuode6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() => {
     console.log('Connected to MongoDB');
 }
 ).catch((err) => {
