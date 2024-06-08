@@ -13,7 +13,7 @@ const Login = () => {
   const handlelogin = async(e) => {
     e.preventDefault();
     const newUser = { email, password };
-    const response = await axios.post('https://free-spotify-using-mern-mcov.vercel.app/login', newUser);
+    const response = await axios.post('https://free-spotify-using-mern.vercel.app/login', newUser);
     //handle jwt token
     if(response.data.token) {
       console.log(response.data.token);
