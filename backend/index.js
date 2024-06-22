@@ -2,19 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
-const PORT = 3001;
 const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const jwtSecret = '12345';
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+const jwtSecret = process.env.JWT_SECRET || '12345';
 
 // CORS middleware setup
 app.use(cors({
   origin: 'https://free-spotify-using-mern-mcov.vercel.app', // Update with your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials:true
+  credentials: true
 }));
 
 app.use(bodyParser.json());
@@ -24,11 +26,12 @@ app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://free-spotify-using-mern-mcov.vercel.app'); // Update with your frontend URL
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.sendStatus(204);
 });
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://vishaltiwariup2019:vishal@9293@cluster0.8yuode6.mongodb.net/spotify', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://vishaltiwariup2019:vishal@9293@cluster0.8yuode6.mongodb.net/spotify', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -86,7 +89,17 @@ app.post('/login', async (req, res) => {
   }
 });
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;  // Export the app for Vercel
