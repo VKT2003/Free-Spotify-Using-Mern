@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 });
 
 // Registration route
-app.post('/register', async (req, res) => {
+app.post('https://free-spotify-using-mern.vercel.app/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const user = await User.findOne({ email });
@@ -62,7 +62,7 @@ app.post('/register', async (req, res) => {
 });
 
 // Login route
-app.post('/login', async (req, res) => {
+app.post('https://free-spotify-using-mern.vercel.app/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
