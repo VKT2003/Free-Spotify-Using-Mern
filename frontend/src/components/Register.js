@@ -17,7 +17,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const newUser = { username, email, password };
-      const response = await axios.post('https://free-spotify-using-mern-rmmoipy8v-vkt2003s-projects.vercel.app/register', newUser);
+      const response = await axios.post('/register', newUser);
       console.log(response.data); // Check the response data here
       //check if user already exists
       if (response.data.message === 'User created') {
