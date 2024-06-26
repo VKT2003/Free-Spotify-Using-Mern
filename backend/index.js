@@ -88,6 +88,42 @@ app.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+app.post('/api/google', async (req, res) => {
+    const { name, email, password } = req.body;
+    const user = await User.findOne({ email });
+    
+    if (user) {
+        const payload = {
+            user: {
+                username: user.name,
+                email: user.email,
+                password: user.password
+            }
+        };
+        jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token: token });
+        }
+        );
+    } else{
+        const newUser = new User({ username:name, email:email, password:password });
+        
+        await newUser.save();
+        const payload = {
+            user: {
+                username: newUser.name, 
+                email: newUser.email,
+                password: newUser.password
+            }
+        };
+        jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token: token });
+        }
+        );
+    }
+}
+);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
