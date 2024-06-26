@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     const newUser = { email, password };
     try {
-      const response = await axios.post('http://localhost:4000/login', newUser);
+      const response = await axios.post('https://free-spotify-using-mern-rmmoipy8v-vkt2003s-projects.vercel.app/login', newUser);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         toast.success('Login successful');
