@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './FormStyles.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -12,54 +12,34 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
-
+ 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const newUser = { username, email, password };
-      const response = await axios.post('https://free-spotify-using-mern.vercel.app/register', newUser);
-      console.log(response);
-      // Check if user already exists
+      const response = await axios.post('http://localhost:4000/register', newUser);
+      console.log(response.data); // Check the response data here
+      //check if user already exists
       if (response.data.message === 'User created') {
-        toast.success('User created successfully', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        navigate('/login');
+        toast.success('Registration successful');
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
       } else {
-        toast.error(response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        navigate('/register');
+        toast.error(response.data.message);
+        setTimeout(() => {
+          navigate('/register');
+        }, 2000);
+        
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again later.', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      console.error(error);
+      console.error('Registration error:', error);
+      toast.error('Registration failed');
     }
   }
-
+      
   return (
     <div className="form-container">
-      <ToastContainer />
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div className="form-group">
@@ -77,8 +57,9 @@ const Register = () => {
         <button type="submit" className="btn">Register</button>
         Already have an account? <Link className='linkfor' to='/login'>Sign In</Link>
       </form>
+      <ToastContainer />
     </div>
-  );
+  )
 }
 
 export default Register;
