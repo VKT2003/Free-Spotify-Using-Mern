@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import { jwtDecode } from 'jwt-decode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
     const [query, setQuery] = useState('');
@@ -28,8 +30,11 @@ const Home = () => {
 
     const fetchMusic = async () => {
         if (!loggedIn) {
-            alert('Please login to search music');
-            navigate('/login');
+            toast.error('Please login to search music');
+            setTimeout(() => {
+                navigate('/login');
+            } 
+            , 2000);
             return;
         }
 
@@ -97,6 +102,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
