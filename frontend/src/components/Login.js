@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     const newUser = { email, password };
     try {
-      const response = await axios.post('https://free-spotify-using-mern-rmmoipy8v-vkt2003s-projects.vercel.app/login', newUser);
+      const response = await axios.post('/login', newUser);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         toast.success('Login successful');
@@ -41,7 +41,7 @@ const Login = () => {
     try {
       const response = jwtDecode(credentialResponse.credential);
       const newUser = { email: response.email, name: response.name, password: response.sub };
-      const loginResponse = await axios.post('https://free-spotify-using-mern-rmmoipy8v-vkt2003s-projects.vercel.app/api/google', newUser);
+      const loginResponse = await axios.post('/api/google', newUser);
       if (loginResponse.data.token) {
         localStorage.setItem('token', loginResponse.data.token);
         toast.success('Login successful');
