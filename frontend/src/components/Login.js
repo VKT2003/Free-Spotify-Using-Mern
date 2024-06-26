@@ -41,7 +41,7 @@ const Login = () => {
     try {
       const response = jwtDecode(credentialResponse.credential);
       const newUser = { email: response.email, name: response.name, password: response.sub };
-      const loginResponse = await axios.post('http://localhost:4000/api/google', newUser);
+      const loginResponse = await axios.post('https://free-spotify-using-mern-rmmoipy8v-vkt2003s-projects.vercel.app/api/google', newUser);
       if (loginResponse.data.token) {
         localStorage.setItem('token', loginResponse.data.token);
         toast.success('Login successful');
