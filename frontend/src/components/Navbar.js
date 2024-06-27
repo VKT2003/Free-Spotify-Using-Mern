@@ -14,7 +14,7 @@ const Navbar = () => {
     if (token) {
       // Decode token
       const data = jwtDecode(token);
-      setUserData(data.user.name);
+      setUserData(data.user.email);
     } else {
       console.log('User not logged in');
     }
