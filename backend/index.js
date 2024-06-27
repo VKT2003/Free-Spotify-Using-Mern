@@ -13,7 +13,7 @@ const jwtSecret = process.env.JWT_SECRET || '12345';
 
 // CORS middleware setup
 app.use(cors({
-  origin: 'https://free-spotify-using-mern.vercel.app', // Update with your frontend URL
+  origin: 'https://free-spotify-using-mern-mcov.vercel.app', // Update with your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 // Explicitly handle preflight requests
 app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://free-spotify-using-mern.vercel.app'); // Update with your frontend URL
+  res.setHeader('Access-Control-Allow-Origin', 'https://free-spotify-using-mern-mcov.vercel.app'); // Update with your frontend URL
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
